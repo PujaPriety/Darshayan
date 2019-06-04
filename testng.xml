@@ -1,0 +1,8 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="RunnerTestSuite">
+    <test name="RunnerTest">
+        <classes>
+            <class name="test1.RunnerTest"/>
+        </classes>
+    </test>
+</suite>
