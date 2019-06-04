@@ -1,7 +1,9 @@
-package dto;
+package dto.request;
 
+import dto.common.Address;
+import dto.common.Name;
 import lombok.Data;
-import java.util.Arrays;
+
 import java.util.List;
 
 @Data

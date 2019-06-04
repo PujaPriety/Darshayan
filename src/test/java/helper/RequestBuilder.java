@@ -1,12 +1,12 @@
 package helper;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import dto.Address;
-import dto.CreateRunnerRequest;
-import dto.Name;
 
 import java.util.ArrayList;
 import java.util.List;
+import dto.request.CreateRunnerRequest;
+import dto.common.Name;
+import dto.common.Address;
 
 public class RequestBuilder {
 
@@ -19,7 +19,7 @@ public class RequestBuilder {
         name.setFirstName("Mayank");
         name.setLastName("Kumar");
         createRunnerRequest.setName(name);
-        createRunnerRequest.setEmail("Mayankkumar0079@cars24.com");
+        createRunnerRequest.setEmail("Mayankkumar0011@cars24.com");
         Address address=new Address();
         address.setAddressLine("10th Cross");
         address.setCity("Bangalore");

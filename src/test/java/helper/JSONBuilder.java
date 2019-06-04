@@ -5,6 +5,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Data;
 
+import javax.imageio.IIOException;
+import java.io.IOException;
+
 @Data
 public class JSONBuilder {
     private static ObjectMapper objectMapper;
@@ -18,5 +21,9 @@ public class JSONBuilder {
     public static String getJson(Object object) throws JsonProcessingException {
         return objectMapper.writeValueAsString(object);
 
+    }
+
+    public static <T> T convertJsonToObject(String content, Class<T> valueType ) throws IOException  {
+        return objectMapper.readValue(content,valueType);
     }
 }
