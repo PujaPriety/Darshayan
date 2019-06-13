@@ -7,7 +7,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class CreateRunnerRequest {
+public class RunnerRequest {
     private Name name;
     private Address address;
     private String email;
