@@ -5,7 +5,7 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class RunnerDetails {
+public class CreatedRunnerDetails {
     private String runnerId;
     private Name name;
     private String email;

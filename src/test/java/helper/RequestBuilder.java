@@ -4,40 +4,54 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.ArrayList;
 import java.util.List;
-import dto.request.CreateRunnerRequest;
+
+import dto.request.LoginRequest;
+import dto.request.RunnerRequest;
 import dto.common.Name;
 import dto.common.Address;
+import org.testng.ITestContext;
 
 public class RequestBuilder {
+    String requestBody;
 
-    public String buildRunnerRequest() throws JsonProcessingException {
-        CreateRunnerRequest createRunnerRequest=new CreateRunnerRequest();
-        List<Integer> preferredLanguageList= new ArrayList<Integer>();
+    public String buildRunnerRequest(ITestContext context) throws JsonProcessingException {
+        RunnerRequest runnerRequest = new RunnerRequest();
+        List<Integer> preferredLanguageList = new ArrayList<Integer>();
         preferredLanguageList.add(1);
         preferredLanguageList.add(2);
-        Name name=new Name();
+        Name name = new Name();
         name.setFirstName("Mayank");
         name.setLastName("Kumar");
-        createRunnerRequest.setName(name);
-        createRunnerRequest.setEmail("Mayankkumar0011@cars24.com");
-        Address address=new Address();
+        runnerRequest.setName(name);
+        runnerRequest.setEmail((String) context.getAttribute("email"));
+        Address address = new Address();
         address.setAddressLine("10th Cross");
         address.setCity("Bangalore");
         address.setPincode("560017");
         address.setState("Karnataka");
-        createRunnerRequest.setAddress(address);
-        createRunnerRequest.setPreferredLanguages(preferredLanguageList);
-        createRunnerRequest.setDateOfBirth("01-06-2019");
-        createRunnerRequest.setImageUrl("");
-        createRunnerRequest.setRegistrationId("1234");
-        createRunnerRequest.setPassword("pass");
-        createRunnerRequest.setMobileNumber("7829608292");
-        createRunnerRequest.setDesignation("RUNNER");
-        createRunnerRequest.setReportingManager("Test");
-        createRunnerRequest.setAuthenticationType("Normal");
-        String runnerRequest=JSONBuilder.getJson(createRunnerRequest);
+        runnerRequest.setAddress(address);
+        runnerRequest.setPreferredLanguages(preferredLanguageList);
+        runnerRequest.setDateOfBirth("01-06-2019");
+        runnerRequest.setPassword((String) context.getAttribute("password"));
+        runnerRequest.setImageUrl("");
+        runnerRequest.setRegistrationId("1234");
+        runnerRequest.setPassword((String) context.getAttribute("password"));
+        runnerRequest.setMobileNumber("7829608292");
+        runnerRequest.setDesignation("RUNNER");
+        runnerRequest.setReportingManager("Test");
+        runnerRequest.setAuthenticationType("Normal");
+        requestBody = JSONBuilder.getJson(runnerRequest);
         System.out.println("Runner request is:" + runnerRequest);
-        return runnerRequest;
+        return requestBody;
 
+    }
+
+    public String buildLoginRequest(ITestContext context) throws JsonProcessingException {
+        LoginRequest loginRequest = new LoginRequest();
+        loginRequest.setUseremail((String) context.getAttribute("email"));
+        loginRequest.setPassword((String) context.getAttribute("password"));
+        requestBody = JSONBuilder.getJson(loginRequest);
+        System.out.println("Request Body is :" + requestBody);
+        return requestBody;
     }
 }
