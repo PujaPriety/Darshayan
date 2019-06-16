@@ -1,4 +1,4 @@
-package dto.common;
+package com.Flexera.FTR.dto.common;
 
 import lombok.Data;
 

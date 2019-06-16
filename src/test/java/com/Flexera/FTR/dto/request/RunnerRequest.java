@@ -1,7 +1,7 @@
-package dto.request;
+package com.Flexera.FTR.dto.request;
 
-import dto.common.Address;
-import dto.common.Name;
+import com.Flexera.FTR.dto.common.Address;
+import com.Flexera.FTR.dto.common.Name;
 import lombok.Data;
 
 import java.util.List;

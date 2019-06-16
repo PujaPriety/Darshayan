@@ -1,8 +1,8 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="RunnerTestSuite">
-    <test name="RunnerTest">
+    <test name="RunnerRelatedTest">
         <classes>
-            <class name="test1.RunnerTest"/>
+            <class name="com.Flexera.FTR.tests.RunnerTest"/>
         </classes>
     </test>
 </suite>

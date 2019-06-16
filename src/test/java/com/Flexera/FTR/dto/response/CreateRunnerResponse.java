@@ -1,6 +1,6 @@
-package dto.response;
+package com.Flexera.FTR.dto.response;
 
-import dto.common.CreatedRunnerDetails;
+import com.Flexera.FTR.dto.common.CreatedRunnerDetails;
 import lombok.Data;
 
 @Data

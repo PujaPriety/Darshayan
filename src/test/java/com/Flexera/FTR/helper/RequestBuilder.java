@@ -1,14 +1,15 @@
-package helper;
+package com.Flexera.FTR.helper;
 
+import com.Flexera.FTR.dto.request.TaskRequest;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import dto.request.LoginRequest;
-import dto.request.RunnerRequest;
-import dto.common.Name;
-import dto.common.Address;
+import com.Flexera.FTR.dto.request.LoginRequest;
+import com.Flexera.FTR.dto.request.RunnerRequest;
+import com.Flexera.FTR.dto.common.Name;
+import com.Flexera.FTR.dto.common.Address;
 import org.testng.ITestContext;
 
 public class RequestBuilder {
@@ -53,5 +54,20 @@ public class RequestBuilder {
         requestBody = JSONBuilder.getJson(loginRequest);
         System.out.println("Request Body is :" + requestBody);
         return requestBody;
+    }
+
+    public String buildCreateTaskRequest(ITestContext context) throws JsonProcessingException{
+        TaskRequest taskRequest=new TaskRequest();
+        taskRequest.setCustomerFirstName("Puja");
+        taskRequest.setCustomerLastName("Priety");
+        Address address= new Address();
+        address.setAddressLine("10th Cross");
+        address.setRegion("jggu");
+        address.setCity("Bangalore");
+        address.setState("Karnataka");
+        address.setPincode("560017");
+        taskRequest.setDocumentPickupAddress(address);
+        taskRequest.setLeadId();
+
     }
 }

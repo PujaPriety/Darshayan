@@ -1,10 +1,9 @@
-package test1;
+package com.Flexera.FTR.tests;
 
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import dto.response.CreateRunnerResponse;
-import helper.JSONBuilder;
-import helper.RequestBuilder;
+import com.Flexera.FTR.dto.response.CreateRunnerResponse;
+import com.Flexera.FTR.helper.JSONBuilder;
+import com.Flexera.FTR.helper.RequestBuilder;
 import io.restassured.RestAssured;
 import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
@@ -14,15 +13,14 @@ import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import utility.Constant;
+import com.Flexera.FTR.utility.Constant;
 
 import java.io.IOException;
 import java.util.List;
 
-
 public class RunnerTest {
     RequestBuilder requestBuilder = new RequestBuilder();
-    String access_Token;
+
 
     @BeforeClass
     public void setUP() {
@@ -32,7 +30,7 @@ public class RunnerTest {
 
     @Test
     public void testRunnerCreation(ITestContext context) throws JsonProcessingException, IOException {
-        context.setAttribute("email", "Mayankkumar0098@cars24.com");
+        context.setAttribute("email", "Mayankkumar0097@cars24.com");
         context.setAttribute("password", "pass");
         RequestSpecification requestSpecification = RestAssured.given().body(requestBuilder.buildRunnerRequest(context)).header("Content-Type", "application/json");
         Response response = requestSpecification.request(Method.POST, Constant.runnerPath);
@@ -48,16 +46,24 @@ public class RunnerTest {
         //Assert.assertEquals(preferredLanguagesList.get(0));
     }
 
-    @Test
+    @Test(dependsOnMethods = "testRunnerCreation")
     public void testRunnerLogin(ITestContext context) throws JsonProcessingException {
         RequestSpecification requestSpecification = RestAssured.given().body(requestBuilder.buildLoginRequest(context)).header("Content-Type", "application/json");
         Response response = requestSpecification.request(Method.POST, Constant.loginRunnerPath);
         JsonPath jsonPath = new JsonPath(response.asString());
         String token = jsonPath.getString("token");
-        context.setAttribute(access_Token, token);
-        System.out.println("Token value is" + context.getAttribute("access_Token"));
+        System.out.println("Token is : " + token);
+        context.setAttribute(Constant.access_Token, token);
+        System.out.println("Token value is : " + context.getAttribute(Constant.access_Token));
         Assert.assertEquals(response.getStatusCode(), 200);
 
     }
 
+    @Test(dependsOnMethods = "testRunnerLogin")
+    public void getRunnerListTest(ITestContext context) {
+        RequestSpecification requestSpecification = RestAssured.given().formParam("city", "Bangalore").header("access-token", context.getAttribute(Constant.access_Token));
+        Response response = requestSpecification.request(Method.GET, Constant.runnerListPath);
+        System.out.println("Response is: "+ response.asString());
+
+    }
 }
